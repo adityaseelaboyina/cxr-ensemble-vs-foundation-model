@@ -1,0 +1,12 @@
+{
+  "evax_s": {
+    "evaxrecipe": 0.8278608086692597,
+    "evaxrecipe_seed1": 0.827083940052706,
+    "evaxrecipe_seed2": 0.8281600577514184
+  },
+  "densenet121": {
+    "evaxrecipe": 0.8050981375826768,
+    "evaxrecipe_seed1": 0.8085116239211952,
+    "evaxrecipe_seed2": 0.8045162929698736
+  }
+}

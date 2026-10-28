@@ -1,0 +1,14 @@
+\begin{table}[t]
+\caption{Training Ablations on DenseNet121 (Test Macro-F1)}
+\label{tab:ablation_single}
+\centering
+\begin{tabular}{lcc}
+\toprule
+Configuration & Macro-F1 & $\Delta$ \\
+\midrule
+Full training recipe & 0.339 & --- \\
+\quad No focal loss & 0.332 & -0.007 \\
+\quad No augmentation & 0.314 & -0.025 \\
+\bottomrule
+\end{tabular}
+\end{table}

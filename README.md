@@ -27,7 +27,12 @@ notebooks/
   CXR_Ensemble_Experiments.ipynb   main run: data, five ImageNet backbones, evaluation
   CXR_v3_Phase2.ipynb              EVA-X-S runs, ViT rerun, foundation-model analyses
   CXR_v3_Phase3.ipynb              same-recipe controls and seed replicates
+results/
+  main/              summary and tables from the main run
+  phase2/            analysis outputs for the ImageNet ensemble and EVA-X-S runs, latency benchmark
+  phase3/            same-recipe analyses, seed results, integrity-check reports
 tests/
+  test_stats.py      known-answer checks for the p-values, Holm correction, patient bootstrap and AUROC
   synth.py           synthetic data for testing the analysis code (not real results)
 ```
 
@@ -45,11 +50,16 @@ Training was done on Google Colab with one A100. The notebooks expect a Drive fo
 
 1. Run `CXR_Ensemble_Experiments.ipynb`. It downloads ChestX-ray14 through `kagglehub`, builds the official split, and trains the five ImageNet backbones.
 2. Run `CXR_v3_Phase2.ipynb`, then `CXR_v3_Phase3.ipynb`.
-3. Build the tables:
+3. Build the tables.
+
+The analysis outputs behind every number in the paper are in `results/`, so the tables can be rebuilt without retraining:
 
 ```
-python src/build_tables.py --r1 <results> --v3 <results_v3> --v3b <results_v3b> --v3c <results_v3b> --out tables
+python src/build_tables.py --r1 results/main --v3 results/phase2 --v3b results/phase3 --v3c results/phase3 --out tables
+python tests/test_stats.py
 ```
+
+Bootstrap p-values are two-sided, $2(k+1)/(B+1)$ with $k$ the number of resamples on the smaller side of zero. Older `analysis_v3.json` files in `results/` were written before that formula was moved into `analysis_v3.py` and store $2k/B$; `build_tables.py` converts them, so the tables use the same formula either way.
 
 ## Data and weights
 

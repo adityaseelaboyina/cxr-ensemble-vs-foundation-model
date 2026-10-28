@@ -1,0 +1,15 @@
+\begin{table}[t]
+\caption{Ablation Results (Test Macro-F1)}
+\label{tab:ablation}
+\centering
+\begin{tabular}{lcc}
+\toprule
+Configuration & Macro-F1 & $\Delta$ \\
+\midrule
+Full stacked ensemble & 0.345 & --- \\
+\quad Average fusion instead of stacking & 0.337 & -0.008 \\
+\quad CNNs only (no Transformers) & 0.345 & +0.001 \\
+\quad Transformers only (no CNNs) & 0.304 & -0.041 \\
+\bottomrule
+\end{tabular}
+\end{table}

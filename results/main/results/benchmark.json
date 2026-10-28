@@ -1,0 +1,16 @@
+{
+  "gpu": "NVIDIA A100-SXM4-80GB",
+  "batch_size": 64,
+  "fp32": {
+    "images_per_s": 188.0927548974471,
+    "exams_per_hour": 677133.9176308096,
+    "test_macro_f1": 0.3439197159627686
+  },
+  "bf16": {
+    "images_per_s": 550.4142960866488,
+    "exams_per_hour": 1981491.4659119358,
+    "test_macro_f1": 0.3446157043922568
+  },
+  "speedup": 2.926291852053252,
+  "macro_f1_change_vs_fp32": 0.0006959884294882035
+}

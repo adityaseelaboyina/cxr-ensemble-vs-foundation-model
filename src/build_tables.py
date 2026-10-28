@@ -51,8 +51,11 @@ def write_table(name, lines):
         f.write('\n'.join(lines + ['']))
 
 
-def p_add1(p):
-    # analysis_v3 stores 2*min(tail fraction), which can be 0; use 2(k+1)/(B+1) instead
+def p_add1(p, an):
+    # Analyses run before the p-value fix stored 2*min(tail fraction), which can be 0. Convert those to the
+    # paper's 2(k+1)/(B+1). Newer analysis_v3.json files are marked p_method='add_one' and are used as is.
+    if A[an].get('p_method') == 'add_one':
+        return p
     k = round(p * B_BOOT / 2)
     return min(1.0, 2 * (k + 1) / (B_BOOT + 1))
 
@@ -117,7 +120,7 @@ for an in ['base5', 'fm_evaxrecipe', 'fm_shared', 'same', 'full']:
         if (c['a'], c['b']) in seen:
             continue
         seen.add((c['a'], c['b']))
-        fam_rows.append(dict(c, analysis=an, family=FAM[an], p_raw=p_add1(c['auroc_p'])))
+        fam_rows.append(dict(c, analysis=an, family=FAM[an], p_raw=p_add1(c['auroc_p'], an)))
     assert len(fam_rows) == A[an]['n_hypotheses'], (an, len(fam_rows), A[an]['n_hypotheses'])
     for r, h in zip(fam_rows, holm([r['p_raw'] for r in fam_rows])):
         r['p_holm_fam'] = h
@@ -172,7 +175,7 @@ write_table('tab_comparisons.tex', [
     r'and $B=1{,}000$ (smallest attainable value 0.002), Holm-corrected within each family: '
     r'A, ImageNet five (4 comparisons); B, with EVA-X-S under its own recipe (6); D, with EVA-X-S under the shared recipe (7), '
     r'all pre-specified; C, the same-recipe pair (5), and E, all six models with the EVA-X recipe (7), both added after seeing family B (marked $^\ast$). '
-    r'All 29 comparisons, with Holm correction across all of them, are in Table~\ref{tab:allcomp}.}',
+    r'Table~\ref{tab:allcomp} lists all 29 comparisons, with an approximate, non-confirmatory joint correction as a sensitivity analysis.}',
     r'\end{table*}'])
 
 # Table X: every comparison
@@ -304,9 +307,9 @@ for an, tag in [('fm_evaxrecipe', 'FM'), ('base5', 'Five')]:
 
 # per-finding: recompute p with 2(k+1)/(B+1) and Holm over the 14 findings; the CSV also feeds plot_perfinding.py
 pl = list(csv.DictReader(open(f'{args.v3}/fm_evaxrecipe/per_label_gain.csv')))
-padj = holm([p_add1(float(r['p'])) for r in pl])
+padj = holm([p_add1(float(r['p']), 'fm_evaxrecipe') for r in pl])
 for r, h in zip(pl, padj):
-    r['p'] = f"{p_add1(float(r['p'])):.4f}"
+    r['p'] = f"{p_add1(float(r['p']), 'fm_evaxrecipe'):.4f}"
     r['p_holm'] = f'{h:.4f}'
 with open(f'{OUT}/per_label_gain_corrected.csv', 'w', newline='') as f:
     w = csv.DictWriter(f, fieldnames=list(pl[0].keys()))

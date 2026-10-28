@@ -1,0 +1,241 @@
+{
+  "items": [
+    {
+      "level": "PASS",
+      "area": "data",
+      "msg": "official test split: 25596 images (expected 25596)"
+    },
+    {
+      "level": "PASS",
+      "area": "data",
+      "msg": "patient overlap between splits: {'train&val': 0, 'train&test': 0, 'val&test': 0}"
+    },
+    {
+      "level": "PASS",
+      "area": "data",
+      "msg": "label columns consistent with Finding Labels (mismatches: 0)"
+    },
+    {
+      "level": "PASS",
+      "area": "data",
+      "msg": "split sizes {'train': 77988, 'test': 25596, 'val': 8536}"
+    },
+    {
+      "level": "PASS",
+      "area": "runs",
+      "msg": "gamma0/densenet121: 22 epochs, best epoch 17, early-stopping rule consistent"
+    },
+    {
+      "level": "PASS",
+      "area": "runs",
+      "msg": "gamma0/densenet121: val AUROC from saved preds 0.8370 vs history best 0.8370 (|diff| 0.0000)"
+    },
+    {
+      "level": "PASS",
+      "area": "runs",
+      "msg": "gamma1/densenet121: 16 epochs, best epoch 11, early-stopping rule consistent"
+    },
+    {
+      "level": "PASS",
+      "area": "runs",
+      "msg": "gamma1/densenet121: val AUROC from saved preds 0.8296 vs history best 0.8296 (|diff| 0.0000)"
+    },
+    {
+      "level": "PASS",
+      "area": "runs",
+      "msg": "gamma3/densenet121: 23 epochs, best epoch 18, early-stopping rule consistent"
+    },
+    {
+      "level": "PASS",
+      "area": "runs",
+      "msg": "gamma3/densenet121: val AUROC from saved preds 0.8364 vs history best 0.8364 (|diff| 0.0000)"
+    },
+    {
+      "level": "PASS",
+      "area": "runs",
+      "msg": "lr1e-3/densenet121: 34 epochs, best epoch 29, early-stopping rule consistent"
+    },
+    {
+      "level": "PASS",
+      "area": "runs",
+      "msg": "lr1e-3/densenet121: val AUROC from saved preds 0.7709 vs history best 0.7709 (|diff| 0.0000)"
+    },
+    {
+      "level": "PASS",
+      "area": "runs",
+      "msg": "lr5e-5/densenet121: 22 epochs, best epoch 17, early-stopping rule consistent"
+    },
+    {
+      "level": "PASS",
+      "area": "runs",
+      "msg": "lr5e-5/densenet121: val AUROC from saved preds 0.8321 vs history best 0.8321 (|diff| 0.0000)"
+    },
+    {
+      "level": "PASS",
+      "area": "runs",
+      "msg": "main/coatnet0: 23 epochs, best epoch 18, early-stopping rule consistent"
+    },
+    {
+      "level": "PASS",
+      "area": "runs",
+      "msg": "main/coatnet0: val AUROC from saved preds 0.8293 vs history best 0.8293 (|diff| 0.0000)"
+    },
+    {
+      "level": "PASS",
+      "area": "runs",
+      "msg": "main/densenet121: 23 epochs, best epoch 18, early-stopping rule consistent"
+    },
+    {
+      "level": "PASS",
+      "area": "runs",
+      "msg": "main/densenet121: val AUROC from saved preds 0.8396 vs history best 0.8396 (|diff| 0.0000)"
+    },
+    {
+      "level": "PASS",
+      "area": "runs",
+      "msg": "main/resnet18: 18 epochs, best epoch 13, early-stopping rule consistent"
+    },
+    {
+      "level": "PASS",
+      "area": "runs",
+      "msg": "main/resnet18: val AUROC from saved preds 0.8214 vs history best 0.8214 (|diff| 0.0000)"
+    },
+    {
+      "level": "PASS",
+      "area": "runs",
+      "msg": "main/swin_b: 24 epochs, best epoch 19, early-stopping rule consistent"
+    },
+    {
+      "level": "PASS",
+      "area": "runs",
+      "msg": "main/swin_b: val AUROC from saved preds 0.8246 vs history best 0.8246 (|diff| 0.0000)"
+    },
+    {
+      "level": "PASS",
+      "area": "runs",
+      "msg": "main/vit_b16: 11 epochs, best epoch 6, early-stopping rule consistent"
+    },
+    {
+      "level": "PASS",
+      "area": "runs",
+      "msg": "main/vit_b16: val AUROC from saved preds 0.7584 vs history best 0.7584 (|diff| 0.0000)"
+    },
+    {
+      "level": "PASS",
+      "area": "runs",
+      "msg": "no_aug/densenet121: 12 epochs, best epoch 7, early-stopping rule consistent"
+    },
+    {
+      "level": "PASS",
+      "area": "runs",
+      "msg": "no_aug/densenet121: val AUROC from saved preds 0.8182 vs history best 0.8182 (|diff| 0.0000)"
+    },
+    {
+      "level": "PASS",
+      "area": "results",
+      "msg": "resnet18: reported test AUROC 0.7909 reproduces (0.7909)"
+    },
+    {
+      "level": "PASS",
+      "area": "results",
+      "msg": "densenet121: reported test AUROC 0.8078 reproduces (0.8078)"
+    },
+    {
+      "level": "PASS",
+      "area": "results",
+      "msg": "coatnet0: reported test AUROC 0.7997 reproduces (0.7997)"
+    },
+    {
+      "level": "PASS",
+      "area": "results",
+      "msg": "vit_b16: reported test AUROC 0.7046 reproduces (0.7046)"
+    },
+    {
+      "level": "PASS",
+      "area": "results",
+      "msg": "swin_b: reported test AUROC 0.7919 reproduces (0.7919)"
+    }
+  ],
+  "runs": {
+    "gamma0": {
+      "densenet121": {
+        "epochs": 22,
+        "best_epoch": 17,
+        "val_auroc_recomputed": 0.8370459088772018,
+        "test_auroc": 0.8067843754826908
+      }
+    },
+    "gamma1": {
+      "densenet121": {
+        "epochs": 16,
+        "best_epoch": 11,
+        "val_auroc_recomputed": 0.8295805509122605,
+        "test_auroc": 0.801658723202313
+      }
+    },
+    "gamma3": {
+      "densenet121": {
+        "epochs": 23,
+        "best_epoch": 18,
+        "val_auroc_recomputed": 0.8364362388109151,
+        "test_auroc": 0.8086065946291149
+      }
+    },
+    "lr1e-3": {
+      "densenet121": {
+        "epochs": 34,
+        "best_epoch": 29,
+        "val_auroc_recomputed": 0.7708915181459249,
+        "test_auroc": 0.7248034677524223
+      }
+    },
+    "lr5e-5": {
+      "densenet121": {
+        "epochs": 22,
+        "best_epoch": 17,
+        "val_auroc_recomputed": 0.8321368249047859,
+        "test_auroc": 0.8048383320786333
+      }
+    },
+    "main": {
+      "coatnet0": {
+        "epochs": 23,
+        "best_epoch": 18,
+        "val_auroc_recomputed": 0.8292719907770121,
+        "test_auroc": 0.7996611463561635
+      },
+      "densenet121": {
+        "epochs": 23,
+        "best_epoch": 18,
+        "val_auroc_recomputed": 0.8396328429998674,
+        "test_auroc": 0.8078379270045366
+      },
+      "resnet18": {
+        "epochs": 18,
+        "best_epoch": 13,
+        "val_auroc_recomputed": 0.8214116576990206,
+        "test_auroc": 0.790905051688515
+      },
+      "swin_b": {
+        "epochs": 24,
+        "best_epoch": 19,
+        "val_auroc_recomputed": 0.8246132892592586,
+        "test_auroc": 0.7918804911060858
+      },
+      "vit_b16": {
+        "epochs": 11,
+        "best_epoch": 6,
+        "val_auroc_recomputed": 0.7584497214968142,
+        "test_auroc": 0.7045718950195765
+      }
+    },
+    "no_aug": {
+      "densenet121": {
+        "epochs": 12,
+        "best_epoch": 7,
+        "val_auroc_recomputed": 0.8181740572651756,
+        "test_auroc": 0.7939926078685174
+      }
+    }
+  }
+}

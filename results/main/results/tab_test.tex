@@ -1,0 +1,21 @@
+\begin{table}[t]
+\caption{Test Set Performance}
+\label{tab:test}
+\centering
+\begin{tabular}{lccc}
+\toprule
+Model & Macro-F1 & Micro-F1 & Mean AUC \\
+\midrule
+ResNet18 & 0.312 & 0.367 & 0.791 \\
+DenseNet121 & 0.339 & 0.389 & 0.808 \\
+CoAtNet-0 & 0.328 & 0.382 & 0.800 \\
+ViT-B/16 & 0.211 & 0.289 & 0.705 \\
+Swin-B & 0.324 & 0.390 & 0.792 \\
+\midrule
+Average fusion & 0.337 & 0.401 & 0.814 \\
+\textbf{Stacked Ensemble} & \textbf{0.345} & \textbf{0.390} & \textbf{0.811} \\
+\bottomrule
+\end{tabular}
+\end{table}
+% thresholds: per label, tuned on validation (stacked: on out-of-fold validation predictions)
+% stacked 95% CI: {"macro_f1": [0.329, 0.356], "micro_f1": [0.382, 0.398], "mean_auc": [0.804, 0.817]}

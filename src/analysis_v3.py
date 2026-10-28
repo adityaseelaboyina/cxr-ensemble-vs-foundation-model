@@ -321,10 +321,12 @@ def _ci(a):
 
 
 def _p_two_sided(d):
+    # 2(k+1)/(B+1), k = resamples on the smaller side of zero. Never 0; smallest value with B=1000 is ~0.002.
     d = d[np.isfinite(d)]
     if d.size == 0:
         return float('nan')
-    return float(min(1.0, 2 * min((d <= 0).mean(), (d >= 0).mean())))
+    k = min(int((d <= 0).sum()), int((d >= 0).sum()))
+    return float(min(1.0, 2 * (k + 1) / (d.size + 1)))
 
 
 def holm(pvals):
@@ -364,7 +366,8 @@ def analyze(run_root, cache_dir, out_dir, variant='main', extra_roots=(), n_boot
     gv, gt = meta['Patient ID'].values[vr], meta['Patient ID'].values[tr]
     folds = _group_folds(gv, 5)
     R = {'sources': R_src, 'models': keys, 'n_val': len(vr), 'n_test': len(tr), 'n_test_patients': int(len(np.unique(gt))),
-         'variant': variant, 'protocol': 'thresholds/fusers fit on validation; validation metrics are out-of-fold'}
+         'variant': variant, 'protocol': 'thresholds/fusers fit on validation; validation metrics are out-of-fold',
+         'p_method': 'add_one'}
     print(f'Models: {keys} | val {len(vr)} | test {len(tr)}')
 
     # ---- single models (thresholds on validation; validation predictions are in-sample for thresholds only)

@@ -1,0 +1,143 @@
+\begin{table}[t]
+\caption{Dataset Splits (Avg.\ Findings: Mean Number of Findings per Abnormal Image)}
+\label{tab:splits}
+\centering
+\begin{tabular}{lrrc}
+\toprule
+Split & Images & Patients & Avg.\ Findings \\
+\midrule
+Train & 77,988 & 25,207 & 1.50 \\
+Validation & 8,536 & 2,801 & 1.49 \\
+Test & 25,596 & 2,797 & 1.73 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\caption{Test Set Performance}
+\label{tab:test}
+\centering
+\begin{tabular}{lccc}
+\toprule
+Model & Macro-F1 & Micro-F1 & Mean AUC \\
+\midrule
+ResNet18 & 0.312 & 0.367 & 0.791 \\
+DenseNet121 & 0.339 & 0.389 & 0.808 \\
+CoAtNet-0 & 0.328 & 0.382 & 0.800 \\
+ViT-B/16 & 0.211 & 0.289 & 0.705 \\
+Swin-B & 0.324 & 0.390 & 0.792 \\
+\midrule
+Average fusion & 0.337 & 0.401 & 0.814 \\
+\textbf{Stacked Ensemble} & \textbf{0.345} & \textbf{0.390} & \textbf{0.811} \\
+\bottomrule
+\end{tabular}
+\end{table}
+% thresholds: per label, tuned on validation (stacked: on out-of-fold validation predictions)
+% stacked 95% CI: {"macro_f1": [0.329, 0.356], "micro_f1": [0.382, 0.398], "mean_auc": [0.804, 0.817]}
+
+\begin{table}[t]
+\caption{Per-Class Test Performance of the Stacked Ensemble}
+\label{tab:perclass}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccccr}
+\toprule
+Finding & Precision & Recall & F1 & AUC & Support \\
+\midrule
+Atelectasis & 0.330 & 0.458 & 0.384 & 0.763 & 3279 \\
+Cardiomegaly & 0.399 & 0.432 & 0.415 & 0.899 & 1069 \\
+Effusion & 0.441 & 0.684 & 0.536 & 0.829 & 4658 \\
+Infiltration & 0.355 & 0.762 & 0.484 & 0.710 & 6112 \\
+Mass & 0.343 & 0.392 & 0.366 & 0.818 & 1748 \\
+Nodule & 0.230 & 0.392 & 0.289 & 0.759 & 1623 \\
+Pneumonia & 0.050 & 0.389 & 0.088 & 0.704 & 555 \\
+Pneumothorax & 0.410 & 0.607 & 0.490 & 0.864 & 2665 \\
+Consolidation & 0.157 & 0.430 & 0.230 & 0.737 & 1815 \\
+Edema & 0.202 & 0.352 & 0.257 & 0.853 & 925 \\
+Emphysema & 0.275 & 0.724 & 0.398 & 0.916 & 1093 \\
+Fibrosis & 0.156 & 0.145 & 0.150 & 0.818 & 435 \\
+Pleural Thickening & 0.159 & 0.336 & 0.216 & 0.773 & 1143 \\
+Hernia & 0.577 & 0.477 & 0.522 & 0.912 & 86 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\caption{Stacked Ensemble Test Performance by Subgroup}
+\label{tab:subgroups}
+\centering
+\begin{tabular}{lrcc}
+\toprule
+Subgroup & Images & Macro-F1 & Mean AUC \\
+\midrule
+Male & 14,882 & 0.341 & 0.811 \\
+Female & 10,714 & 0.342 & 0.809 \\
+Age $<$40 & 8,290 & 0.303 & 0.763 \\
+Age 40--59 & 11,224 & 0.350 & 0.808 \\
+Age $\geq$60 & 6,078 & 0.332 & 0.804 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\caption{Ablation Results (Test Macro-F1)}
+\label{tab:ablation}
+\centering
+\begin{tabular}{lcc}
+\toprule
+Configuration & Macro-F1 & $\Delta$ \\
+\midrule
+Full stacked ensemble & 0.345 & --- \\
+\quad Average fusion instead of stacking & 0.337 & -0.008 \\
+\quad CNNs only (no Transformers) & 0.345 & +0.001 \\
+\quad Transformers only (no CNNs) & 0.304 & -0.041 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\caption{Training Ablations on DenseNet121 (Test Macro-F1)}
+\label{tab:ablation_single}
+\centering
+\begin{tabular}{lcc}
+\toprule
+Configuration & Macro-F1 & $\Delta$ \\
+\midrule
+Full training recipe & 0.339 & --- \\
+\quad No focal loss & 0.332 & -0.007 \\
+\quad No augmentation & 0.314 & -0.025 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\caption{Focal Loss $\gamma$ Sensitivity (DenseNet121, Test Macro-F1)}
+\label{tab:gamma}
+\centering
+\begin{tabular}{ccc}
+\toprule
+$\gamma$ & Macro-F1 & $\Delta$ \\
+\midrule
+0 (BCE) & 0.332 & --- \\
+1 & 0.326 & -0.006 \\
+2 & 0.339 & +0.007 \\
+3 & 0.329 & -0.003 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\caption{Initial Learning Rate Sensitivity (DenseNet121, Test Macro-F1)}
+\label{tab:lr}
+\centering
+\begin{tabular}{cc}
+\toprule
+Learning Rate & Macro-F1 \\
+\midrule
+$10^{-3}$ & 0.223 \\
+$10^{-4}$ & 0.339 \\
+$5\times10^{-5}$ & 0.331 \\
+\bottomrule
+\end{tabular}
+\end{table}
