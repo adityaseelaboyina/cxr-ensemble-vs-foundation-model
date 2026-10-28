@@ -1,0 +1,12 @@
+torch
+torchvision
+timm
+albumentations
+kagglehub
+huggingface_hub
+numpy
+pandas
+scipy
+scikit-learn
+matplotlib
+nbformat
